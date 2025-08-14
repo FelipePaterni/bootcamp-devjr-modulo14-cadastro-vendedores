@@ -37,16 +37,22 @@ public class SellerService {
     }
 
     public void deleteById(long id) {
-        sellerRepository.deleteById(id);
+        if (sellerRepository.existsById(id)) {
+            sellerRepository.deleteById(id);
+        } else
+            throw new EntityNotFoundException("Seller not found");
     }
 
     public void update(long id, SellerRequest sellerUpdate) {
-        Seller seller = sellerRepository.getReferenceById(id);
-        seller.setName(sellerUpdate.getName());
-        seller.setSalary(sellerUpdate.getSalary());
-        seller.setGender(sellerUpdate.getGender());
-        seller.setBonus(sellerUpdate.getBonus());
-        sellerRepository.save(seller);
+        try {
+            Seller seller = sellerRepository.getReferenceById(id);
+            seller.setName(sellerUpdate.getName());
+            seller.setSalary(sellerUpdate.getSalary());
+            seller.setGender(sellerUpdate.getGender());
+            seller.setBonus(sellerUpdate.getBonus());
+            sellerRepository.save(seller);
+        } catch (EntityNotFoundException e) {
+            throw new EntityNotFoundException("Product not found");
+        }
     }
-
 }

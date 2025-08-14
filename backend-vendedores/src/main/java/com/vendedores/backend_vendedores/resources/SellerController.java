@@ -1,10 +1,11 @@
-package com.vendedores.backend_vendedores.controller;
+package com.vendedores.backend_vendedores.resources;
 
 import java.net.URI;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,6 +19,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.vendedores.backend_vendedores.DTO.SellerRequest;
 import com.vendedores.backend_vendedores.DTO.SellerResponse;
 import com.vendedores.backend_vendedores.services.SellerService;
+
+import jakarta.validation.Valid;
 
 @RestController
 @RequestMapping("sellers")
@@ -38,7 +41,7 @@ public class SellerController {
     }
 
     @PostMapping
-    public ResponseEntity<SellerResponse> save(@RequestBody SellerRequest sellerRequest) {
+    public ResponseEntity<SellerResponse> save(@Validated @RequestBody SellerRequest sellerRequest) {
         SellerResponse sellerResponse = sellerService.save(sellerRequest);
 
         URI location = ServletUriComponentsBuilder
@@ -51,14 +54,14 @@ public class SellerController {
     }
 
     @PutMapping("{id}")
-    public ResponseEntity<Void> update(@PathVariable long id, @RequestBody SellerRequest sellerUpdate) {
+    public ResponseEntity<Void> update(@PathVariable long id, @Valid @RequestBody SellerRequest sellerUpdate) {
         sellerService.update(id, sellerUpdate);
         return ResponseEntity.noContent().build();
     }
 
     @DeleteMapping("{id}")
     public ResponseEntity<Void> delete(@PathVariable long id) {
-        sellerService.deleteById(id);     
+        sellerService.deleteById(id);
         return ResponseEntity.ok().build();
     }
 }
