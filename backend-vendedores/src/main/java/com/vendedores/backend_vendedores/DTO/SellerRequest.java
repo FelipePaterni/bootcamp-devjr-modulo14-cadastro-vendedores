@@ -5,6 +5,7 @@ import com.vendedores.backend_vendedores.models.Seller;
 import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 public class SellerRequest {
@@ -12,16 +13,16 @@ public class SellerRequest {
     @Size(min = 5, max = 255, message = "Name length min = 5 and max = 255")
     private String name;
 
-    @NotBlank(message = "Salary can not be null")
+    @NotNull(message = "Salary can not be null")
     @Min(value = 1, message = "salary min value = 1")
     private double salary;
 
-    @NotBlank(message = "Bonus can not be null")
+    @NotNull(message = "Bonus can not be null")
     @Min(value = 0, message = "bonus min value = 0")
     @Max(value = 100, message = "bonus max value = 100")
     private double bonus;
     
-    @NotBlank(message = "gender can not be null")
+    @NotNull(message = "gender can not be null")
     private int gender;
 
     public Seller toEntity() {
