@@ -7,11 +7,15 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
+import { SellersComponent } from './components/sellers/sellers.component';
+import { SellerFormComponent } from './components/seller-form/seller-form.component';
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent
+    HomeComponent,
+    SellersComponent,
+    SellerFormComponent
   ],
   imports: [
     BrowserModule,
