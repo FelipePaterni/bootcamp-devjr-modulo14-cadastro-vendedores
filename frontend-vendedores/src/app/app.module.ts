@@ -9,13 +9,17 @@ import { provideHttpClient } from '@angular/common/http';
 import { HomeComponent } from './components/home/home.component';
 import { SellersComponent } from './components/sellers/sellers.component';
 import { SellerFormComponent } from './components/seller-form/seller-form.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     SellersComponent,
-    SellerFormComponent
+    SellerFormComponent,
+    NavbarComponent,
+    FooterComponent
   ],
   imports: [
     BrowserModule,
