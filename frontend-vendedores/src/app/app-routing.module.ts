@@ -6,8 +6,9 @@ import { SellersComponent } from './components/sellers/sellers.component';
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'sellers', component: SellersComponent },
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: '**', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  
 ];
 
 @NgModule({
