@@ -26,14 +26,19 @@ export class SellerFormComponent implements OnChanges {
   constructor(formBuilder: FormBuilder) {
     this.formGroupSeller = formBuilder.group({
       id: { value: null, disabled: true },
-      name: ['',[
+      name: [
+        '',
+        [
           Validators.required,
           Validators.minLength(5),
           Validators.maxLength(255),
         ],
       ],
-      salary: ['', [ Validators.required,Validators.min(1.0)]],
-      bonus: ['', [ Validators.required,Validators.min(0), Validators.max(100)]],
+      salary: ['', [Validators.required, Validators.min(1.0)]],
+      bonus: [
+        '',
+        [Validators.required, Validators.min(0), Validators.max(100)],
+      ],
       gender: ['', [Validators.required]],
     });
   }
@@ -41,8 +46,6 @@ export class SellerFormComponent implements OnChanges {
     if (this.seller.id) {
       this.formGroupSeller.setValue(this.seller);
     }
-    
-    
   }
   save() {
     if (this.formGroupSeller.valid) {

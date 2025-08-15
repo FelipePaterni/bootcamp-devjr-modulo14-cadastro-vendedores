@@ -25,7 +25,7 @@
           name="name"
           minlength="5"
           type="text"
-         [class]="ngFormSeller.submitted &&(
+          [class]="ngFormSeller.submitted &&(
                sfgName?.errors?.['required'] ||  sfgName?.errors?.['minlength']||sfgName?.errors?.['maxlength']) 
                ? 'form-control is-invalid' 
                : 'form-control'"
@@ -70,7 +70,7 @@
                sfgSalary?.errors?.['required'] ||  sfgSalary?.errors?.['min']) 
                ? 'form-control is-invalid' 
                : 'form-control'"
-            aria-label="Name" 
+            aria-label="Name"
             formControlName="salary"
           />
         </div>
@@ -98,7 +98,7 @@
             type="number"
             min="0"
             max="100"
-             [class]="ngFormSeller.submitted &&(
+            [class]="ngFormSeller.submitted &&(
                sfgBonus?.errors?.['required'] ||  sfgBonus?.errors?.['min'] ||sfgBonus?.errors?.['max']) 
                ? 'form-control is-invalid' 
                : 'form-control'"
@@ -107,7 +107,7 @@
           />
           <span class="input-group-text">%</span>
         </div>
-          <div *ngIf="ngFormSeller.submitted">
+        <div *ngIf="ngFormSeller.submitted">
           <small
             *ngIf="sfgBonus?.errors?.['required']"
             class="form-text text-danger"
@@ -140,7 +140,7 @@
             name="gender"
             formControlName="gender"
             id="maleRadio"
-            value="0"
+            [value]="0"
           />
           <label class="form-check-label" for="maleRadio">Masculino</label>
         </div>
@@ -151,7 +151,7 @@
             name="gender"
             formControlName="gender"
             id="fameleRadio"
-            value="1"
+            [value]="1"
           />
           <label class="form-check-label" for="fameleRadio">Feminino</label>
         </div>

@@ -10,14 +10,17 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
   styleUrl: './sellers.component.css',
 })
 export class SellersComponent implements OnInit {
-   deleteSeller: Seller = {} as Seller;
+  deleteSeller: Seller = {} as Seller;
   seller: Seller = {} as Seller;
   sellers: Seller[] = [];
 
   showForm: boolean = false;
   isEditing: boolean = false;
 
-  constructor(private sellersService: SellersService, private modalService: NgbModal) {}
+  constructor(
+    private sellersService: SellersService,
+    private modalService: NgbModal
+  ) {}
 
   ngOnInit(): void {
     this.loadSellers();
@@ -58,19 +61,16 @@ export class SellersComponent implements OnInit {
     this.seller = {} as Seller;
   }
 
-  delete(modal:any,seller:Seller){
-    console.log(seller);
-    
+  delete(modal: any, seller: Seller) {
     this.deleteSeller = seller;
-       console.log(this.deleteSeller);
-    this.modalService.open(modal).result.then((confirm)=>{
+    this.modalService.open(modal).result.then((confirm) => {
       if (confirm) {
-         this.sellersService.delete(seller).subscribe({
+        this.sellersService.delete(seller).subscribe({
           next: () => {
-            this.sellers= this.sellers.filter((s)=> s !== seller)
+            this.sellers = this.sellers.filter((s) => s !== seller);
           },
         });
       }
-    })
+    });
   }
 }

@@ -4,77 +4,77 @@
     [seller]="seller"
     (saveEmitter)="save($event)"
   />
-<div *ngIf="!showForm">
-  <div class="display-6 my-4" >Produtos Cadastrados:</div>
+  <div *ngIf="!showForm">
+    <div class="display-6 my-4">Produtos Cadastrados:</div>
 
-  <button class="btn btn-primary mb-4" (click)="create()">Novo</button>
-  <div
-    class="border border-2 rounded mt-5 p-0 shadow col-sm-12 offset-sm-0 col-lg-10 offset-lg-1"
-  >
-    <table class="table table-hover table-striped m-0">
-      <thead>
-        <tr>
-          <th scope="col">#</th>
-          <th scope="col">Nome</th>
-          <th scope="col">Gênero</th>
-          <th scope="col">Salário</th>
-          <th scope="col">Bonificação</th>
-          <th scope="col" class="d-none d-md-table-cell text-end pe-3">
-            Ações
-          </th>
-        </tr>
-      </thead>
-      <tbody class="table-group-divider">
-        <tr *ngFor="let seller of sellers">
-          <th scope="row">{{ seller.id }}</th>
-          <td>{{ seller.name }}</td>
-          <td>{{ seller.gender | gender }}</td>
-          <td>{{ seller.salary | currency : "BRL" }}</td>
-          <td>{{ seller.bonus  | number:'1.0-1' }}%</td>
-          <td class="text-end pe-3">
-            <button class="btn p-1">
-              <i class="bi bi-pencil" (click)="edit(seller)"></i>
-            </button>
-            <button class="btn p-1" (click)="delete(confirmModal, seller)">
-              <i class="bi bi-trash"></i>
-            </button>
-          </td>
-        </tr>
-      </tbody>
-    </table>
+    <button class="btn btn-primary mb-4" (click)="create()">Novo</button>
+    <div
+      class="border border-2 rounded mt-2 p-0 shadow col-sm-12 offset-sm-0 col-lg-10 offset-lg-1"
+    >
+      <table class="table table-hover table-striped m-0">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nome</th>
+            <th scope="col">Gênero</th>
+            <th scope="col">Salário</th>
+            <th scope="col">Bonificação</th>
+            <th scope="col" class="d-none d-md-table-cell text-end pe-3">
+              Ações
+            </th>
+          </tr>
+        </thead>
+        <tbody class="table-group-divider">
+          <tr *ngFor="let seller of sellers">
+            <th scope="row">{{ seller.id }}</th>
+            <td>{{ seller.name }}</td>
+            <td>{{ seller.gender | gender }}</td>
+            <td>{{ seller.salary | currency : "BRL" }}</td>
+            <td>{{ seller.bonus | number : "1.0-1" }}%</td>
+            <td class="text-end pe-3">
+              <button class="btn p-1">
+                <i class="bi bi-pencil" (click)="edit(seller)"></i>
+              </button>
+              <button class="btn p-1" (click)="delete(confirmModal, seller)">
+                <i class="bi bi-trash"></i>
+              </button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <ng-template #confirmModal let-modal>
+      <div class="modal-header">
+        <h5 class="modal-title">Remover Produto</h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="modal.close()"
+        ></button>
+      </div>
+      <div class="modal-body">
+        <p>
+          Deseja remover o vendedor {{ deleteSeller.name }}(#{{
+            deleteSeller.id
+          }})?
+        </p>
+      </div>
+      <div class="modal-footer">
+        <button
+          type="button"
+          class="btn btn-danger"
+          data-bs-dismiss="modal"
+          (click)="modal.close(true)"
+        >
+          Confirmar
+        </button>
+        <button type="button" class="btn btn-primary" (click)="modal.close()">
+          Cancelar
+        </button>
+      </div>
+    </ng-template>
   </div>
-
-  <ng-template #confirmModal let-modal>
-    <div class="modal-header">
-      <h5 class="modal-title">Remover Produto</h5>
-      <button
-        type="button"
-        class="btn-close"
-        data-bs-dismiss="modal"
-        aria-label="Close"
-        (click)="modal.close()"
-      ></button>
-    </div>
-    <div class="modal-body">
-      <p>
-        Deseja remover o vendedor {{ deleteSeller.name }}(#{{
-          deleteSeller.id
-        }})?
-      </p>
-    </div>
-    <div class="modal-footer">
-      <button
-        type="button"
-        class="btn btn-danger"
-        data-bs-dismiss="modal"
-        (click)="modal.close(true)"
-      >
-        Confirmar
-      </button>
-      <button type="button" class="btn btn-primary" (click)="modal.close()">
-        Cancelar
-      </button>
-    </div>
-  </ng-template>
-</div>
 </div>
