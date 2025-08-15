@@ -1,7 +1,6 @@
-<div class="container-lg p-0">
-    
-    <div class="display-6 my-5">Cadastrar Novo Vendedor:</div>
-  <form>
+<div *ngIf="seller" class="container-lg p-0">
+  <div class="display-6 my-4">Cadastrar Novo Vendedor:</div>
+  <form [formGroup]="formGroupSeller" #ngFormSeller="ngForm">
     <div class="row my-3">
       <div class="col">
         <div class="input-group">
@@ -11,7 +10,8 @@
             name="id"
             class="form-control"
             aria-label="Id"
-            disabled
+            formControlName="id"
+            readonly
           />
         </div>
       </div>
@@ -25,9 +25,33 @@
           name="name"
           minlength="5"
           type="text"
-          class="form-control"
+         [class]="ngFormSeller.submitted &&(
+               sfgName?.errors?.['required'] ||  sfgName?.errors?.['minlength']||sfgName?.errors?.['maxlength']) 
+               ? 'form-control is-invalid' 
+               : 'form-control'"
           aria-label="Name"
+          formControlName="name"
         />
+        <div *ngIf="ngFormSeller.submitted">
+          <small
+            *ngIf="sfgName?.errors?.['required']"
+            class="form-text text-danger"
+          >
+            *Nome é requirido
+          </small>
+          <small
+            *ngIf="sfgName?.errors?.['minlength']"
+            class="form-text text-danger"
+          >
+            *Tamanho mínimo de 5 caracteres</small
+          >
+          <small
+            *ngIf="sfgName?.errors?.['maxlength']"
+            class="form-text text-danger"
+          >
+            *Tamanho máximo de 255 caracteres</small
+          >
+        </div>
       </div>
     </div>
 
@@ -42,9 +66,27 @@
             type="number"
             step="0.01"
             min="1"
-            class="form-control"
-            aria-label="Name"
+            [class]="ngFormSeller.submitted &&(
+               sfgSalary?.errors?.['required'] ||  sfgSalary?.errors?.['min']) 
+               ? 'form-control is-invalid' 
+               : 'form-control'"
+            aria-label="Name" 
+            formControlName="salary"
           />
+        </div>
+        <div *ngIf="ngFormSeller.submitted">
+          <small
+            *ngIf="sfgSalary?.errors?.['required']"
+            class="form-text text-danger"
+          >
+            *Salário é requirido
+          </small>
+          <small
+            *ngIf="sfgSalary?.errors?.['min']"
+            class="form-text text-danger"
+          >
+            *Valor mínimo é 1
+          </small>
         </div>
       </div>
       <div class="col-sm-12 col-lg-6">
@@ -56,10 +98,34 @@
             type="number"
             min="0"
             max="100"
-            class="form-control"
+             [class]="ngFormSeller.submitted &&(
+               sfgBonus?.errors?.['required'] ||  sfgBonus?.errors?.['min'] ||sfgBonus?.errors?.['max']) 
+               ? 'form-control is-invalid' 
+               : 'form-control'"
             aria-label="Bonus"
+            formControlName="bonus"
           />
           <span class="input-group-text">%</span>
+        </div>
+          <div *ngIf="ngFormSeller.submitted">
+          <small
+            *ngIf="sfgBonus?.errors?.['required']"
+            class="form-text text-danger"
+          >
+            *Bonificação é requirido
+          </small>
+          <small
+            *ngIf="sfgBonus?.errors?.['min']"
+            class="form-text text-danger"
+          >
+            *Valor mínimo é 0%
+          </small>
+          <small
+            *ngIf="sfgBonus?.errors?.['max']"
+            class="form-text text-danger"
+          >
+            *Tamanho máximo é 100%</small
+          >
         </div>
       </div>
     </div>
@@ -71,29 +137,47 @@
           <input
             class="form-check-input"
             type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio1"
-            value="option1"
+            name="gender"
+            formControlName="gender"
+            id="maleRadio"
+            value="0"
           />
-          <label class="form-check-label" for="inlineRadio1">Masculino</label>
+          <label class="form-check-label" for="maleRadio">Masculino</label>
         </div>
         <div class="form-check form-check-inline">
           <input
             class="form-check-input"
             type="radio"
-            name="inlineRadioOptions"
-            id="inlineRadio2"
-            value="option2"
+            name="gender"
+            formControlName="gender"
+            id="fameleRadio"
+            value="1"
           />
-          <label class="form-check-label" for="inlineRadio2">Feminino</label>
+          <label class="form-check-label" for="fameleRadio">Feminino</label>
         </div>
+      </div>
+      <div *ngIf="ngFormSeller.submitted">
+        <small
+          *ngIf="sfgGender?.errors?.['required']"
+          class="form-text text-danger"
+        >
+          *Bonificação é requirido
+        </small>
       </div>
     </div>
     <div class="row my-4">
       <div class="d-grid gap-2 d-lg-block">
-        <button type="submit" class="btn btn-primary me-lg-2">Salvar</button>
-     
-        <button type="submit" class="btn btn-outline-secondary">Cancelar</button>
+        <button type="submit" class="btn btn-primary me-lg-2" (click)="save()">
+          Salvar
+        </button>
+
+        <button
+          type="submit"
+          class="btn btn-outline-secondary"
+          (click)="cancelar()"
+        >
+          Cancelar
+        </button>
       </div>
     </div>
   </form>
