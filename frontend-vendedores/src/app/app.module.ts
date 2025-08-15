@@ -12,6 +12,7 @@ import { SellerFormComponent } from './components/seller-form/seller-form.compon
 import { NavbarComponent } from './components/navbar/navbar.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
+import { GenderPipe } from './pipe/gender.pipe';
 
 @NgModule({
   declarations: [
@@ -21,7 +22,8 @@ import { HeaderComponent } from './components/header/header.component';
     SellerFormComponent,
     NavbarComponent,
     FooterComponent,
-    HeaderComponent
+    HeaderComponent,
+    GenderPipe
   ],
   imports: [
     BrowserModule,
