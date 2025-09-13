@@ -27,6 +27,12 @@ public class Seller {
     public Seller() {
     }
 
+    public Seller(String name, int gender,double bonus, double salary){
+        this.name = name;
+        this.salary = salary;
+        this.bonus = bonus;
+        this.gender = gender;
+    }
     public Long getId() {
         return id;
     }
