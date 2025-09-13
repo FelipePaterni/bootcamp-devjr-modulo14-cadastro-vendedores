@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Seller } from '../interfaces/Seller';
 
-const URL = 'http://localhost:8080/sellers';
+const URL = 'https://bootcamp-devjr-modulo14-cadastro.onrender.com/sellers'; //'http://localhost:8080/seller';
 
 @Injectable({
   providedIn: 'root',
