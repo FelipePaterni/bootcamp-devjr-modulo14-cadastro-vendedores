@@ -24,6 +24,16 @@ export class SellersComponent implements OnInit {
 
   ngOnInit(): void {
     this.loadSellers();
+    if (!localStorage.getItem('alertShown')) {
+      alert(
+        '⚠️ Atenção!\n\n' +
+          'Este projeto é apenas para fins de estudo.\n' +
+          'Os dados cadastrados são fictícios e o sistema é resetado diariamente.\n\n' +
+          'Obrigado por visitar!'
+      );
+
+      localStorage.setItem('alertShown', 'true');
+    }
   }
 
   loadSellers() {
@@ -32,6 +42,13 @@ export class SellersComponent implements OnInit {
         this.sellers = data;
       },
     });
+  }
+
+  delayAlert() {
+    alert(
+      'ℹ️ Aviso:\n\n' +
+        'Como este sistema é aberto ao público, as alterações podem levar alguns instantes para aparecer.'
+    );
   }
 
   create() {
@@ -49,10 +66,12 @@ export class SellersComponent implements OnInit {
     if (save) {
       if (this.isEditing) {
         this.sellersService.update(this.seller).subscribe();
+        this.delayAlert();
       } else {
         this.sellersService.save(this.seller).subscribe({
           next: (data) => {
             this.sellers.push(data);
+            this.delayAlert();
           },
         });
       }
@@ -68,6 +87,7 @@ export class SellersComponent implements OnInit {
         this.sellersService.delete(seller).subscribe({
           next: () => {
             this.sellers = this.sellers.filter((s) => s !== seller);
+            this.delayAlert();
           },
         });
       }
